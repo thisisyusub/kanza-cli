@@ -1,6 +1,6 @@
 name: kanza_cli
 description: A simple command-line application to generate simple folder and file structure for Flutter Applications
-version: 0.1.2
+version: 0.1.4
 homepage: https://github.com/thisisyusub/kanza-cli
 
 environment:
@@ -11,4 +11,4 @@ dev_dependencies:
   lints: ^1.0.0
  
 executables:
-  kanza: kanza
+  kanza_cli: kanza_cli
