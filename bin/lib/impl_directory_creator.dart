@@ -32,8 +32,6 @@ class ImplDirectoryCreator implements IDirectoryCreator {
         basePath = res.absolute.path;
       }
 
-      print('basePath: $basePath');
-
       final absBlocPath = blocDir.absolute.path;
       final absDataPath = dataDir.absolute.path;
       final absUiPath = uiDir.absolute.path;
