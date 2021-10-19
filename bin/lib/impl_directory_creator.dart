@@ -32,35 +32,41 @@ class ImplDirectoryCreator implements IDirectoryCreator {
         basePath = res.absolute.path;
       }
 
+      print('basePath: $basePath');
+
       final absBlocPath = blocDir.absolute.path;
       final absDataPath = dataDir.absolute.path;
       final absUiPath = uiDir.absolute.path;
 
-      await Future.wait([
-        // bloc directory
-        Directory(absBlocPath).create(),
-        Directory('$absBlocPath/$_core').create(),
+      print('creating directories...\n');
 
-        // data directory
-        Directory(absDataPath).create(),
-        Directory('$absDataPath/$_core').create(),
-        Directory('$absDataPath/models').create(),
-        Directory('$absDataPath/repositories').create(),
-        Directory('$absDataPath/contractors').create(),
-        Directory('$absDataPath/data_providers').create(),
+      print('creating bloc directory...');
+      // bloc directory
+      await Directory(absBlocPath).create();
+      await Directory('$absBlocPath/$_core').create();
 
-        // ui directory
-        Directory(absUiPath).create(),
-        Directory('$absUiPath/pages').create(),
-        Directory('$absUiPath/dialogs').create(),
-        Directory('$absUiPath/$_core').create(),
-        Directory('$absUiPath/global').create(),
+      print('creating data directory...');
+      // data directory
+      await Directory(absDataPath).create();
+      await Directory('$absDataPath/$_core').create();
+      await Directory('$absDataPath/models').create();
+      await Directory('$absDataPath/repositories').create();
+      await Directory('$absDataPath/contractors').create();
+      await Directory('$absDataPath/data_providers').create();
 
-        // utils directory
-        Directory('$basePath/$_utils').create(),
-      ]);
-    } catch (e) {
-      stderr.writeln(e);
+      print('creating ui directory...');
+      // ui directory
+      await Directory(absUiPath).create();
+      await Directory('$absUiPath/pages').create();
+      await Directory('$absUiPath/dialogs').create();
+      await Directory('$absUiPath/$_core').create();
+      await Directory('$absUiPath/global').create();
+
+      print('creating utils directory...');
+      // utils directory
+      await Directory('$basePath/$_utils').create();
+    } catch (e, s) {
+      stderr.writeln('$e => $s');
       exit(2);
     }
   }

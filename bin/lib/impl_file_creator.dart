@@ -9,6 +9,8 @@ class ImplFileCreator implements IFileCreator {
 
   @override
   Future<void> createNecessaryFiles() async {
+    print('creating necessary files...');
+
     await _createFile(
       directoryCreator.blocDir.path + '/core',
       'bloc_observer',
