@@ -14,5 +14,6 @@
     
     
     
- And it will generate the following structure:
- <img src="screenshoots/structure.png"/>
+And it will generate the following structure:
+
+![structure](https://github.com/thisisyusub/kanza-cli/blob/master/screenshoots/structure.png)
