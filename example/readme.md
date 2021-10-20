@@ -13,3 +13,6 @@
     kanza_cli create
     
     
+    
+ And it will generate the following structure:
+ <img src="screenshoots/structure.png"/>
