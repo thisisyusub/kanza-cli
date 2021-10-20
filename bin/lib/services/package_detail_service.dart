@@ -20,17 +20,22 @@ class PackageDetailService {
     return _packageDetailService!;
   }
 
-  Future<PackageDetail?> getPackageDetail(String packageName) async {
+  Future<PackageDetail?> getPackageDetail({required String packageName}) async {
     try {
       http.Response response = await client!.get(
         Uri.parse('${_pubBaseUrl}packages/$packageName'),
       );
 
-      PackageDetail model = PackageDetail.fromJson(
-        json.decode(utf8.decode(response.bodyBytes)),
-      );
+      if (response.statusCode == 200) {
+        PackageDetail model = PackageDetail.fromJson(
+          json.decode(utf8.decode(response.bodyBytes)),
+        );
 
-      return model;
+        return model;
+      } else {
+        stderr.write('${response.statusCode}->${response.body}');
+        return null;
+      }
     } catch (e) {
       stderr.write(e);
       return null;

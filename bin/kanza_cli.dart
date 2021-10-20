@@ -1,7 +1,5 @@
 import 'dart:io';
-
-import 'lib/model/package_detail.dart';
-import 'lib/services/package_detail_service.dart';
+import 'lib/impl_pubspec_creator.dart';
 import 'lib/start.dart';
 import 'package:args/args.dart';
 
@@ -22,12 +20,8 @@ void main(List<String> arguments) async {
   // print(result.stdout);
   // print(result.stderr);
 
-  PackageDetail? data = await PackageDetailService().getPackageDetail('http');
-  if (data != null) {
-    print(data.latest.version);
-  } else {
-    print('null data');
-  }
+  ImplPubspecCreator pubspecCreator = ImplPubspecCreator();
+  await pubspecCreator.getPackageVersion();
 
   if (res.command != null && res.command!.name == 'create') {
     start();
