@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'lib/model/package_detail.dart';
 import 'lib/services/package_detail_service.dart';
 import 'lib/start.dart';
@@ -27,10 +29,10 @@ void main(List<String> arguments) async {
     print('null data');
   }
 
-  // if (res.command != null && res.command!.name == 'create') {
-  //   start();
-  // } else {
-  //   stderr.write('No command specified!');
-  //   exit(1);
-  // }
+  if (res.command != null && res.command!.name == 'create') {
+    start();
+  } else {
+    stderr.write('No command specified!');
+    exit(1);
+  }
 }
