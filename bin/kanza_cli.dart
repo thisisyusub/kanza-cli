@@ -9,6 +9,17 @@ void main(List<String> arguments) async {
 
   final res = argParser.parse(arguments);
 
+  // final result = await Process.run(
+  //   'flutter',
+  //   ['pub', 'outdated'],
+  //   workingDirectory: '.',
+  //   runInShell: true,
+  //   includeParentEnvironment: true,
+  // );
+
+  // print(result.stdout);
+  // print(result.stderr);
+
   if (res.command != null && res.command!.name == 'create') {
     start();
   } else {
