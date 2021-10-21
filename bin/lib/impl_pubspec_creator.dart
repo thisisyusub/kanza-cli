@@ -18,12 +18,5 @@ class ImplPubspecCreator implements IPubspecCreator {
         print(data.toString());
       }
     }
-
-    var bindir = Directory('bin').absolute.path;
-    final file = await File('$bindir/test.dart').create();
-
-    await file.writeAsString('ddd');
-
-    print(await file.readAsString());
   }
 }
