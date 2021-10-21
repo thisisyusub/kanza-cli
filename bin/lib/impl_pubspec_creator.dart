@@ -2,7 +2,6 @@ import 'constants/constants_data.dart';
 import 'i_creators.dart';
 import 'model/package_detail.dart';
 import 'services/package_detail_service.dart';
-import 'dart:io';
 
 class ImplPubspecCreator implements IPubspecCreator {
   @override
