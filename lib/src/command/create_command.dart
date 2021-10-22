@@ -4,6 +4,12 @@ import '../structure_creators/file/impl_file_creator.dart';
 import 'i_command.dart';
 
 class CreateCommand implements ICommand {
+  final ICommand? nextCommand;
+
+  CreateCommand({this.nextCommand});
+
+  
+
   @override
   Future<void> execute() async {
     final directoryCreator = ImplDirectoryCreator();
