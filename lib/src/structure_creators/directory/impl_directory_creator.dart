@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'i_creators.dart';
+import '../i_creators.dart';
 
 class ImplDirectoryCreator implements IDirectoryCreator {
   final _core = 'core';
@@ -21,7 +21,7 @@ class ImplDirectoryCreator implements IDirectoryCreator {
   Directory get uiDir => Directory('$basePath/$_ui');
 
   @override
-  Future<void> createDirectories() async {
+  Future<bool> createDirectories() async {
     try {
       final libDir = Directory('lib');
 
@@ -38,13 +38,13 @@ class ImplDirectoryCreator implements IDirectoryCreator {
 
       print('creating directories...\n');
 
-      print('creating bloc directory...');
       // bloc directory
+      print('creating bloc directory...');
       await Directory(absBlocPath).create();
       await Directory('$absBlocPath/$_core').create();
 
-      print('creating data directory...');
       // data directory
+      print('creating data directory...');
       await Directory(absDataPath).create();
       await Directory('$absDataPath/$_core').create();
       await Directory('$absDataPath/models').create();
@@ -52,20 +52,23 @@ class ImplDirectoryCreator implements IDirectoryCreator {
       await Directory('$absDataPath/contractors').create();
       await Directory('$absDataPath/data_providers').create();
 
-      print('creating ui directory...');
       // ui directory
+      print('creating ui directory...');
       await Directory(absUiPath).create();
       await Directory('$absUiPath/pages').create();
       await Directory('$absUiPath/dialogs').create();
       await Directory('$absUiPath/$_core').create();
       await Directory('$absUiPath/global').create();
 
-      print('creating utils directory...');
       // utils directory
+      print('creating utils directory...');
       await Directory('$basePath/$_utils').create();
+
+      return true;
     } catch (e, s) {
-      stderr.writeln('$e => $s');
-      exit(2);
+      stderr.writeln(e);
+      stderr.writeln(s);
+      return false;
     }
   }
 }

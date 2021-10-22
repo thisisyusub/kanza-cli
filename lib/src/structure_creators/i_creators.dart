@@ -5,7 +5,7 @@ abstract class IKanzaCreator {
 }
 
 abstract class IDirectoryCreator {
-  Future<void> createDirectories();
+  Future<bool> createDirectories();
 
   Directory get blocDir;
 
