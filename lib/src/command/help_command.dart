@@ -1,9 +1,17 @@
+import 'dart:io';
+
 import 'i_command.dart';
 
 class HelpCommand implements ICommand {
   @override
-  Future<void> execute() {
-    // TODO: implement execute
-    throw UnimplementedError();
+  void execute() {
+    stdout.writeln('Usage: kanza_cli <command>\n');
+
+    stdout.writeln('Available commands:');
+    stdout.writeln(
+      'create        Create folder and file structure for Fluter Apps',
+    );
+
+    exit(0);
   }
 }

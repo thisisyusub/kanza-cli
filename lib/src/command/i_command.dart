@@ -1,3 +1,5 @@
+import 'dart:async';
+
 abstract class ICommand {
-  Future<void> execute();
+  FutureOr<void> execute();
 }
