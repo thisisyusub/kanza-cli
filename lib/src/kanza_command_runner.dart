@@ -11,32 +11,30 @@ class KanzaCommandRunner {
   void run(List<String> arguments) {
     final argParser = ArgParser();
 
-    var createCommand = ArgParser();
-
-    argParser.addCommand('create', createCommand);
+    argParser.addCommand('create');
     argParser.addCommand('help');
-    createCommand.addFlag('get-packages');
+    argParser.addFlag('get-packages');
 
-    final ArgResults res;
+    final ArgResults argResult;
 
     try {
-      res = argParser.parse(arguments);
-    } catch(_) {
+      argResult = argParser.parse(arguments);
+    } catch (_) {
       stderr.writeln('No command or flag available!\n');
       HelpCommand().execute();
       exit(2);
     }
-   
 
-    if (res.command != null && res.command!.name != null) {
+    if (argResult.command != null && argResult.command!.name != null) {
       ICommand? command;
 
-      switch (res.command!.name) {
+      switch (argResult.command!.name) {
         case 'create':
           final res = welcomeBoard();
 
           if (res) {
-            bool isNeedPubUpdate =argParser.commands.containsKey('get-packages');
+            bool isNeedPubUpdate = argResult['get-packages'];
+
             print('isNeedPubUpdate: $isNeedPubUpdate');
 
             command = CreateCommand(
@@ -50,7 +48,7 @@ class KanzaCommandRunner {
           command = HelpCommand();
           break;
         default:
-          _errorAndExit(res.command!.name);
+          _errorAndExit(argResult.command!.name);
       }
 
       command!.execute();

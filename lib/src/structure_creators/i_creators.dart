@@ -17,3 +17,7 @@ abstract class IDirectoryCreator {
 abstract class IFileCreator {
   Future<void> createNecessaryFiles();
 }
+
+abstract class IPubspecCreator {
+  Future<void> getPackageVersion();
+}

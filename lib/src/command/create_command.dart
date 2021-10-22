@@ -8,8 +8,6 @@ class CreateCommand implements ICommand {
 
   CreateCommand({this.nextCommand});
 
-  
-
   @override
   Future<void> execute() async {
     final directoryCreator = ImplDirectoryCreator();
@@ -19,6 +17,8 @@ class CreateCommand implements ICommand {
       directoryCreator: directoryCreator,
       fileCreator: fileCreator,
     );
+
+    // await nextCommand?.execute();
 
     return kanzaCreator.create();
   }
