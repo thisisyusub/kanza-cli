@@ -5,6 +5,7 @@ import 'package:args/args.dart';
 import 'command/create_command.dart';
 import 'command/help_command.dart';
 import 'command/i_command.dart';
+import 'command/pub_updater_command.dart';
 
 class KanzaCommandRunner {
   void run(List<String> arguments) {
@@ -12,18 +13,33 @@ class KanzaCommandRunner {
 
     argParser.addCommand('create');
     argParser.addCommand('help');
+    argParser.addFlag('get-packages');
 
-    final res = argParser.parse(arguments);
+    final ArgResults argResult;
 
-    if (res.command != null && res.command!.name != null) {
+    try {
+      argResult = argParser.parse(arguments);
+    } catch (_) {
+      stderr.writeln('No command or flag available!\n');
+      HelpCommand().execute();
+      exit(2);
+    }
+
+    if (argResult.command != null && argResult.command!.name != null) {
       ICommand? command;
 
-      switch (res.command!.name) {
+      switch (argResult.command!.name) {
         case 'create':
           final res = welcomeBoard();
 
           if (res) {
-            command = CreateCommand();
+            bool isNeedPubUpdate = argResult['get-packages'];
+
+            print('isNeedPubUpdate: $isNeedPubUpdate');
+
+            command = CreateCommand(
+              nextCommand: isNeedPubUpdate ? PubUpdaterCommand() : null,
+            );
           } else {
             exit(0);
           }
@@ -32,7 +48,7 @@ class KanzaCommandRunner {
           command = HelpCommand();
           break;
         default:
-          _errorAndExit(res.command!.name);
+          _errorAndExit(argResult.command!.name);
       }
 
       command!.execute();
